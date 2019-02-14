@@ -1,5 +1,7 @@
 <template>
   <div>
+    <searchInput></searchInput>
+
     <div class="hero">
       <div class="searchBar">
         <input type="text"
@@ -16,7 +18,9 @@
       <button class="tabs__btn" @click="showTab" >Animals</button>
     </div>
 
-    <div v-for='i in ip' class="image-box">
+    <searchResults></searchResults>
+
+    <!-- <div v-for='i in ip' class="image-box">
       <img :src='i.urls.small'>
       <div class="image-box--content">
         <h4><b>Photographer:&nbsp;&nbsp;{{ i.user.first_name }}</b></h4>
@@ -26,13 +30,20 @@
     </div>
     <div v-if="ip.length === 0">
       No Results Found
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import searchInput from '~/components/searchInput.vue'
+import searchResults from '~/components/searchResults.vue'
+
 
 export default {
+  components: {
+    searchInput,
+    searchResults
+  },
   data() {
     return {
       userInput: '',
@@ -65,6 +76,8 @@ export default {
       let query = event.currentTarget.textContent
       const ip = await this.$axios.$get('https://api.unsplash.com/photos/search/?query=' + query + '&client_id=' + this.clientId )
       this.ip = ip
+
+      this.$nuxt.$emit('IMAGE_DATA', ip)
 
     }
   }
