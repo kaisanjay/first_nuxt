@@ -1,5 +1,5 @@
 <template>
-	<div>
+  <div>
     <div class="hero">
 			<div class="searchBar">
         <input
@@ -17,15 +17,15 @@
         <button class="tabs__btn" id="popular-tab">Popular</button>
       </nuxt-link>
       <nuxt-link class="format-anchor" to="/nature">
-        <button class="tabs__btn">Nature</button>
+        <button class="tabs__btn" id="nature-tab">Nature</button>
       </nuxt-link>
 
       <nuxt-link class="format-anchor" to="/animals">
-        <button class="tabs__btn">Animals</button>
+        <button class="tabs__btn" id="animals-tab">Animals</button>
       </nuxt-link>
     </div>
 
-		<div v-for="i in ip" class="image-box" :key="i.id">
+    <div v-for="i in ip" class="image-box" :key="i.id">
       <img :src="i.urls.small">
     </div>
   </div>
@@ -40,14 +40,16 @@ export default {
     }
   },
 
-	async asyncData({ $axios }) {
-    const ip = await $axios.$get('https://api.unsplash.com/photos/search/?query=popular&client_id=5f39d0a9e6755434f948e418ab5ce36ae00b133409a4b988c59a633ddbe594ba')
-    return { ip }
+  async asyncData({ $axios }) {
+    const ip = await $axios.$get(
+      "https://api.unsplash.com/photos/search/?query=animals&client_id=5f39d0a9e6755434f948e418ab5ce36ae00b133409a4b988c59a633ddbe594ba"
+    );
+    return { ip };
   },
 
-	mounted() {
-    document.getElementById('popular-tab').classList.add('tabs__active')
-  },
+  mounted() {
+    document.getElementById("animals-tab").classList.add("tabs__active");
+	},
 	
 	methods: {
 		async search() {
@@ -59,8 +61,7 @@ export default {
       this.ip = ip
     },
 	}
-	
-}
+};
 </script>
 
 <style lang="sass">

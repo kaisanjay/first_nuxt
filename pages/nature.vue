@@ -14,10 +14,10 @@
     </div>
     <div class="tabs">
       <nuxt-link class="format-anchor" to="/popular">
-        <button class="tabs__btn" id="popular-tab">Popular</button>
+        <button class="tabs__btn">Popular</button>
       </nuxt-link>
       <nuxt-link class="format-anchor" to="/nature">
-        <button class="tabs__btn">Nature</button>
+        <button class="tabs__btn" id="nature-tab" >Nature</button>
       </nuxt-link>
 
       <nuxt-link class="format-anchor" to="/animals">
@@ -41,12 +41,12 @@ export default {
   },
 
 	async asyncData({ $axios }) {
-    const ip = await $axios.$get('https://api.unsplash.com/photos/search/?query=popular&client_id=5f39d0a9e6755434f948e418ab5ce36ae00b133409a4b988c59a633ddbe594ba')
+    const ip = await $axios.$get('https://api.unsplash.com/photos/search/?query=nature&client_id=5f39d0a9e6755434f948e418ab5ce36ae00b133409a4b988c59a633ddbe594ba')
     return { ip }
   },
 
 	mounted() {
-    document.getElementById('popular-tab').classList.add('tabs__active')
+    document.getElementById('nature-tab').classList.add('tabs__active')
   },
 	
 	methods: {
